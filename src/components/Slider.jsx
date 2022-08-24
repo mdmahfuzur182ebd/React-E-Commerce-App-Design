@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
+import { sliderItems} from '../data';
 
 
 const Container =styled.div`
@@ -24,7 +25,7 @@ const Arrow = styled.div`
      top: 0;
      bottom: 0;
      left: ${(props) => props.direction === "left" && "10px"};
-     right: ${(props) => props.direction === "right" && "10px"};  
+     right: ${(props) => props.direction === "right" && "10px"};
      margin: auto;
      cursor: pointer;
      opacity: 0.5;
@@ -34,7 +35,8 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
-    transform: translateX(-200vw);
+    transition: all 1.5s ease;
+    transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -71,64 +73,50 @@ const Desc = styled.p`
 `;
 
 const Button = styled.button`
-  padding: 10px;
-  font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
+   padding: 10px;
+   font-size: 20px;
+   background-color: transparent;
+   cursor: pointer;
 `;
 
+
 const Slider = () => {
-
-  const [slideIndex, setSlideIndex ] = useState(0);  
+  const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {
-
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
   };
 
   return (
     <Container>
-        <Arrow direction="left" onClick={()=>handleClick("left")}>
-             <ArrowLeftOutlined/>
-        </Arrow>
-         <Wrapper> 
-             <Slide bg="f5fafd">
-                <ImgContainer>
-                    <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
-                </ImgContainer>
+      <Arrow direction="left" onClick={() => handleClick("left")}>
+        <ArrowLeftOutlined />
+      </Arrow>
 
-                <InfoContainer>
-                     <Title>SUMMER SALE</Title>
-                     <Desc>DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.</Desc>
-                     <Button>SHOW NOW</Button>
-                </InfoContainer>
-           </Slide>
-             <Slide  bg="f5f1ed">
-                <ImgContainer>
-                    <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
-                </ImgContainer>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={item.img} />
+            </ImgContainer>
 
-                <InfoContainer>
-                     <Title>WINTER SALE</Title>
-                     <Desc>DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.</Desc>
-                     <Button>SHOW NOW</Button>
-                </InfoContainer>
-           </Slide>
-             <Slide  bg="fbfof4">
-                <ImgContainer>
-                    <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
-                </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
+      </Wrapper>
 
-                <InfoContainer>
-                     <Title>POPULAR SALE</Title>
-                     <Desc>DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.</Desc>
-                     <Button>SHOW NOW</Button>
-                </InfoContainer>
-           </Slide>
-         </Wrapper>
-        <Arrow direction="right" onClick={()=>handleClick("right")}>
-             <ArrowRightOutlined/>
-        </Arrow>
+      <Arrow direction="right" onClick={() => handleClick("right")}>
+        <ArrowRightOutlined />
+      </Arrow>
     </Container>
-  )
-}
+  );
+};
 
-export default Slider
+export default Slider;
