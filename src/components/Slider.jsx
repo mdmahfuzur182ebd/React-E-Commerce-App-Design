@@ -1,4 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
 
 
@@ -27,11 +28,13 @@ const Arrow = styled.div`
      margin: auto;
      cursor: pointer;
      opacity: 0.5;
+     z-index: 2;
 `;
 
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
+    transform: translateX(-200vw);
 `;
 
 const Slide = styled.div`
@@ -39,6 +42,7 @@ const Slide = styled.div`
     height: 100vh;
     display: flex;
     align-items: center;
+    background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
@@ -74,14 +78,19 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
-  return (
 
+  const [slideIndex, setSlideIndex ] = useState(0);  
+  const handleClick = (direction) => {
+
+  };
+
+  return (
     <Container>
-        <Arrow direction="left">
+        <Arrow direction="left" onClick={()=>handleClick("left")}>
              <ArrowLeftOutlined/>
         </Arrow>
-         <Wrapper>
-             <Slide>
+         <Wrapper> 
+             <Slide bg="f5fafd">
                 <ImgContainer>
                     <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
                 </ImgContainer>
@@ -92,7 +101,7 @@ const Slider = () => {
                      <Button>SHOW NOW</Button>
                 </InfoContainer>
            </Slide>
-             <Slide>
+             <Slide  bg="f5f1ed">
                 <ImgContainer>
                     <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
                 </ImgContainer>
@@ -103,7 +112,7 @@ const Slider = () => {
                      <Button>SHOW NOW</Button>
                 </InfoContainer>
            </Slide>
-             <Slide>
+             <Slide  bg="fbfof4">
                 <ImgContainer>
                     <Image src="https://img.freepik.com/free-photo/two-happy-girls-sweaters-having-fun-with-shopping-trolley-megaphone-white-wall_171337-2714.jpg?w=1380&t=st=1661368448~exp=1661369048~hmac=ba62d138ac664c2d4e2b6060284bc09ca4c6be4bbdd6b2ec8487a5b345e332c2" />
                 </ImgContainer>
@@ -115,7 +124,7 @@ const Slider = () => {
                 </InfoContainer>
            </Slide>
          </Wrapper>
-        <Arrow direction="right">
+        <Arrow direction="right" onClick={()=>handleClick("right")}>
              <ArrowRightOutlined/>
         </Arrow>
     </Container>
