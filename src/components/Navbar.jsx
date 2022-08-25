@@ -75,7 +75,7 @@ const Navbar = () => {
              </Left>
 
              <Center>
-                <Logo>LAMA.</Logo>
+                <Logo>Ecstasy.</Logo>
              </Center>
 
              <Right>
