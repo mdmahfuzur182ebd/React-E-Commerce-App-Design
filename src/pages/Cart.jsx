@@ -154,8 +154,8 @@ const Button = styled.button`
 const Cart = () => {
   return (
     <Container>
-      <Announcement />
       <Navbar />
+       <Announcement />
       <Wrapper>
 
         <Title>YOUR BAG</Title>
@@ -225,11 +225,29 @@ const Cart = () => {
             </Product>
 
           </Info>
-
-   
+          <Summary>
+                <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+                <SummaryItem>
+                <SummaryItemText>Subtotal</SummaryItemText>
+                <SummaryItemPrice>$ 80</SummaryItemPrice>
+                </SummaryItem>
+                <SummaryItem>
+                <SummaryItemText>Estimated Shipping</SummaryItemText>
+                <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                </SummaryItem>
+                <SummaryItem>
+                <SummaryItemText>Shipping Discount</SummaryItemText>
+                <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                </SummaryItem>
+                <SummaryItem type="total">
+                <SummaryItemText>Total</SummaryItemText>
+                <SummaryItemPrice>$ 80</SummaryItemPrice>
+                </SummaryItem>
+                <Button>CHECKOUT NOW</Button>
+          </Summary>
         </Bottom>
       </Wrapper>
-
+        <Hr/>
       <Footer />
     </Container>
   );
